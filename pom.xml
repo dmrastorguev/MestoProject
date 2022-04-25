@@ -14,7 +14,13 @@
 
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <selenide.version>5.20.1</selenide.version>
+        <selenium-java.version>3.141.59</selenium-java.version>
         <junit.version>4.13.2</junit.version>
+        <mockito.version>3.12.4</mockito.version>
+        <byte-buddy.version>1.11.16</byte-buddy.version>
+        <jacoco.version>0.8.7</jacoco.version>
+
         <rest-assured.version>4.4.0</rest-assured.version>
         <!-- версия Aspectj -->
         <aspectj.version>1.9.7</aspectj.version>
@@ -30,6 +36,35 @@
         <version>${junit.version}</version>
         <scope>test</scope>
     </dependency>
+
+     <dependency>
+         <groupId>com.codeborne</groupId>
+         <artifactId>selenide</artifactId>
+         <version>${selenide.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium-java.version}</version>
+    </dependency>
+
+        <!--Этот блок нужен для работы с заглушками-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>${byte-buddy.version}</version>
+        </dependency>
+        <!--Конец блока для работы с заглушками-->
+
+
 
      <dependency>
             <groupId>io.rest-assured</groupId>
@@ -59,6 +94,32 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+
+                <executions>
+                    <execution>
+                        <!--id выбираешь самостоятельно-->
+                        <id>prepare-agent</id>
+                        <!--в какой фазе maven будет выполняться цель-->
+                        <phase>initialize</phase>
+                        <!--цель jacoco, которую нужно выполнить-->
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <!-- настройка плагина maven-surefire-plugin -->
                 <groupId>org.apache.maven.plugins</groupId>

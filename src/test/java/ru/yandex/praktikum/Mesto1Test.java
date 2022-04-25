@@ -1,4 +1,4 @@
-package org.example;
+package ru.yandex.praktikum;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;

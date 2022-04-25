@@ -1,4 +1,4 @@
-package org.example;
+package ru.yandex.praktikum;
 
 import static org.junit.Assert.assertTrue;
 
